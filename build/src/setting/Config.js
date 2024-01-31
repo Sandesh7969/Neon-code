@@ -17,8 +17,8 @@ export default class OrasConfig extends Object {
     constructor() {
         super();
         this.token =
-            "";
-        this.botid = ""
+            "" || process.env['token'];
+        this.botid = "1183989229953486919"
         this.prefix = "+";
         this.nodes = [
             {
@@ -41,13 +41,13 @@ export default class OrasConfig extends Object {
             guildDelete: "",
             Cmds: "",
         };
-        this.server = "https://discord.gg/codersplanet";
+        this.server = "https://discord.gg/GPzYFx7zfe";
         this.botinvite = ``;
-        this.spotiId = "";
-        this.spotiSecret = "";
-        this.owners = [""];
+        this.spotiId = "17989e4e4f6948bf82fb7247d4df4bb1";
+        this.spotiSecret = "d0995e1d28fe4c0ca467ba5046d586ce";
+        this.owners = ["1131953433134497923"];
         this.color = "#2b2d31";
-        this.supportId = ""; //Server Id
+        this.supportId = "1183922582366457856"; //Server Id
         this.spotiNodes = [
             {
                 id: `Kronix`,
