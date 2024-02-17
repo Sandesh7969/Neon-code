@@ -7,19 +7,19 @@ export default class Ready extends OrasEvent {
             this.client.logger.ready(`${this.client.user.username} is Online!`);
             const activities = [
                 {
-                    content: `Kronix | ${await this.client.cluster
+                    content: `Music | ${await this.client.cluster
                         .broadcastEval((x) => x.guilds.cache.size)
                         .then((result) => result.reduce((a, b) => a + b, 0))} Servers`,
                     type: 0,
                     status: `dnd`,
                 },
                 {
-                    content: `Kronix | ${this.client.config.prefix}help`,
+                    content: `Music | ${this.client.config.prefix}help`,
                     type: 2,
                     status: `idle`,
                 },
                 {
-                    content: `Kronix | ${this.client.config.prefix}play`,
+                    content: `Music | ${this.client.config.prefix}play`,
                     type: 3,
                     status: `online`,
                 },
