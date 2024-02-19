@@ -22,12 +22,8 @@ export default class OrasPlay extends OrasCommand {
                     embeds: [
                         this.client.utils
                             .premiumEmbed(message.guildId)
-                            .setDescription(`<:music__kastro:1191703892438822913> | Command Usage : \`${prefix}play <name/songurl>\``)
-                        .setFooter({
-                                        text: `Requested By: ${message.author.tag}`,
-                        iconURL: `${message.author.displayAvatarURL({ dynamic: true })}`
-                                    })
-                            .setTitle(`Play`),
+                            .setDescription(`\`${prefix}play <search query or url\``)
+                            .setTitle(`Play Syntax`),
                     ],
                 });
             let query = args.join(" ");
@@ -171,21 +167,23 @@ export default class OrasPlay extends OrasCommand {
                 });
             }
             else {
-                let node = this.client.shoukaku.getNode(); 
-                let b1 = this.client.utils.button(`custom_id`, null, 2, `oras_default_search`, null, "<:youtuber:1097093954635301016>", null);
-                let b2 = this.client.utils.button(`custom_id`, null, 3, `oras_spoti_search`, null, this.client.emoji.spotiSearch, null, `Spotify`);
-                let b3 = this.client.utils.button(`custom_id`, null, 4, `oras_deez_search`, null, this.client.emoji.deezSearch);
-                let b4 = this.client.utils.button(`custom_id`, null, 1, `oras_sound_search`, null, this.client.emoji.soundSearch);
-                let buttons = [b1, b2, b3, b4];
+                let node = this.client.shoukaku.getNode();
+                let b1 = this.client.utils.button(`custom_id`, null, 2, `oras_default_search`, null, this.client.emoji.defSearch);
+                let b2 = this.client.utils.button(`custom_id`, null, 3, `oras_spoti_search`, null, this.client.emoji.spotiSearch);
+                let buttons = [b1, b2];
                 let row = this.client.utils.actionRow(buttons);
                 let em = this.client.utils
                     .premiumEmbed(message.guildId)
-                    .setDescription(`<:music__kastro:1191703892438822913> | Choose the search engine you prefer to play Music/Search Songs from it`)
-                .setFooter({
-                                        text: `Requested By: ${message.author.tag}`,
-                        iconURL: `${message.author.displayAvatarURL({ dynamic: true })}`
-                                    })
-                    .setTitle(`Play`);
+                    .setAuthor({
+                        name: `${message.author.username}`,
+                        iconURL: message.author.displayAvatarURL(),
+                    })
+                    .setFooter({
+                    text: `Thanks For Selecting ${this.client.user.username}`,
+                    iconURL: this.client.user.displayAvatarURL({ dynamic: true }),
+                    })
+                    .setDescription(`> ${this.client.emoji.defSearch} ** :  You Tube Search**\n> ${this.client.emoji.spotiSearch} ** :  Spotify Search**\n\n- Choose One of the buttons below to play music`)
+                    .setTitle(`Select Search Engines`);
                 let msg = await message.channel.send({
                     embeds: [em],
                     components: [row],
@@ -270,83 +268,3 @@ export default class OrasPlay extends OrasCommand {
                                 return interaction.update({
                                     embeds: [
                                         this.client.utils
-                                            .premiumEmbed(message.guild.id)
-                                            .setDescription(`${this.client.emoji.queue} Added [${tr.info.title.substring(0, 35)}](${this.client.config.voteUrl}) to Queue`),
-                                    ],
-                                    components: [],
-                                });
-                            }
-                        });
-                    }
-                    else if (interaction.customId === `oras_deez_search`) {
-                        // let result = await this.client.kazagumo.search(query, {
-                        //   engine: `deezer`,
-                        //   requester: message.author,
-                        // });
-                        // if (!result.tracks.length)
-                        return interaction.update({
-                            embeds: [
-                                this.client.utils
-                                    .premiumEmbed(message.guildId)
-                                    .setDescription(`${this.client.emoji.cross} [No Result](${this.client.config.voteUrl}) found for the query`),
-                            ],
-                            components: [],
-                        });
-                        // let track = result.tracks[0];
-                        // let node = this.client.shoukaku.getNode();
-                        // track = this.client.utils.track(track);
-                        // const dispatcher = await this.client.api.handle(
-                        //   message.guild,
-                        //   message.member,
-                        //   message.channel,
-                        //   track,
-                        //   node
-                        // );
-                        // dispatcher?.play();
-                        // return interaction.update({
-                        //   embeds: [
-                        //     this.client.utils
-                        //       .premiumEmbed(message.guild.id)
-                        //       .setDescription(
-                        //         `${
-                        //           this.client.emoji.queue
-                        //         } Added [${track.info.title.substring(0, 35)}](${
-                        //           this.client.config.voteUrl
-                        //         }) to Queue`
-                        //       ),
-                        //   ],
-                        //   components: [],
-                        // });
-                    }
-                    else if (interaction.customId === `oras_sound_search`) {
-                        let node = this.client.shoukaku.getNode();
-                        let res = await node.rest.resolve(`scsearch:${query}`);
-                        if (!res.tracks.length)
-                            return interaction.update({
-                                embeds: [
-                                    this.client.utils
-                                        .premiumEmbed(message.guildId)
-                                        .setDescription(`${this.client.emoji.cross} [No Results](${this.client.config.voteUrl}) found for the query`),
-                                ],
-                                components: [],
-                            });
-                        let track = res.tracks[0];
-                        track.info.requester = message.author;
-                        let tr = this.client.utils.track(track);
-                        const dispatcher = await this.client.api.handle(message.guild, message.member, message.channel, node, tr);
-                        dispatcher?.play();
-                        return interaction.update({
-                            embeds: [
-                                this.client.utils
-                                    .premiumEmbed(message.guildId)
-                                    .setDescription(`${this.client.emoji.queue} Added [${track.info.title.substring(0, 35)}](${this.client.config.voteUrl}) to Queue`),
-                            ],
-                            components: [],
-                        });
-                    }
-                });
-            }
-        };
-    }
-}
-//# sourceMappingURL=Play.js.map
