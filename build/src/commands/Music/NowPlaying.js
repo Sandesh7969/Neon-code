@@ -33,4 +33,4 @@ export default class NowPlaying extends OrasCommand {
         };
     }
 }
-//# sourceMappingURL=NowPlaying.js.map
+//# sourceMappingURL=NowPlaying.js.map 
