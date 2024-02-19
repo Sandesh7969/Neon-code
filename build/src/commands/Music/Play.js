@@ -268,3 +268,14 @@ export default class OrasPlay extends OrasCommand {
                                 return interaction.update({
                                     embeds: [
                                         this.client.utils
+                                            .premiumEmbed(message.guild.id)
+                                            .setDescription(`${this.client.emoji.queue} Added [${tr.info.title.substring(0, 35)}](${this.client.config.voteUrl}) to Queue`),
+                                    ],
+                                    components: [],
+                                });
+                            }
+                        });
+                    }
+                    else if (interaction.customId === `oras_deez_search`) {
+                        // let result = await this.client.kazagumo.search(query, {
+                        //   engine: `deezer`,
