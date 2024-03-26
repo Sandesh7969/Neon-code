@@ -37,9 +37,9 @@ export default class OrasConfig extends Object {
         this.voteApi =
             "";
         this.webhooks = {
-            guildCreate: "https://discord.com/api/webhooks/1206509224796880906/ac0KbKQv5FmoUaLVijQmKRO_mUtb0Dg8hLwFyeGuBePlhc6rB-i5l2Rj87xV8Z1VUBHR",
-            guildDelete: "https://discord.com/api/webhooks/1206509224796880906/ac0KbKQv5FmoUaLVijQmKRO_mUtb0Dg8hLwFyeGuBePlhc6rB-i5l2Rj87xV8Z1VUBHR",
-            Cmds: "https://discord.com/api/webhooks/1206509224796880906/ac0KbKQv5FmoUaLVijQmKRO_mUtb0Dg8hLwFyeGuBePlhc6rB-i5l2Rj87xV8Z1VUBHR",
+            guildCreate: "" || process.env['guildCreate'],
+            guildDelete: "" || process.env['guildDelete'],
+            Cmds: "" || process.env['Cmds'],
         };
         this.server = "https://discord.gg/GPzYFx7zfe";
         this.botinvite = `https://discord.com/api/oauth2/authorize?client_id=1203216933583978577&permissions=551906761088&scope=bot`;
